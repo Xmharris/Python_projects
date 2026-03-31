@@ -47,8 +47,7 @@ def menu():
     select = None
     
     while select != 'stop' :
-        if player.exp % 10 == 0:
-            player.level_up()
+        player.level_check()
         print(
             f"-"*20,
             f"Time to start your adventure!",
@@ -77,8 +76,8 @@ def menu():
             if answer == "print()":
                 print("That is correct!")
                 player.create_pet()
-                player.gain_xp(10)
-                print("Exp + 10")
+                player.gain_xp(20)
+                print("Exp + 20")
             else:
                 print("Your test went arry!! incorrect.")
                 player.take_dmg(5)
@@ -90,8 +89,8 @@ def menu():
             answer = input("If you wanted to create a function to build_a_bridge across the dangerious cavern what is the first comand word you type *hint its 3 letters long* ___ build_a_bridge(supplies): ").islower()
             if answer == "def":
                 print("You did it!")
-                player.gain_xp(15)
-                print("Exp + 15")
+                player.gain_xp(25)
+                print("Exp + 25")
             else:
                 print("The bridge colllapsed! incorrect")
                 player.take_dmg(5)
@@ -108,6 +107,7 @@ def menu():
                     basic_combat(player, skell)
                     player.weapons["Great Python Sward"] = 20
                     print("You received a Great Sword!")
+                    player.gain_xp(40)
                 else:
                     print("Outch you got boned!")
                     player.take_dmg(10)
@@ -120,6 +120,7 @@ def menu():
                 if answer == "Remainder of devision":
                     print("Correct!")
                     player.weapons["Ruby Ring"] = 20
+                    player.gain_xp(20)
                 else:
                     print("You barely excape with your life. ")
 

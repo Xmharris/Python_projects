@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from multiprocessing.dummy import Value
 from urllib import response
 import json
 
@@ -24,6 +25,7 @@ class Character:
         print(f"{self.name} is now level {self.lvl}")
      
     def gain_xp(self,xp):
+        print(f"{self.name} gained {xp} exp!")
         self.exp += xp
        
     def take_dmg(self, dmg):
@@ -65,7 +67,32 @@ class Character:
             "*"*6,
             sep="\n"
             )   
-        
+
+    def level_check(self):
+        lev = {
+            0 : 1,
+            25 : 2,
+            50 : 3,
+            100 : 4,
+            150 : 5,
+            200 : 6,
+            250 : 7,
+            300 : 8,
+            350 : 9,
+            400 : 10
+            }
+        start = self.lvl
+        for xpneeded, level in lev.items():
+            if self.exp >= xpneeded:
+                self.lvl = level
+                print(f"{self.name} leveled up! {self.lvl}")
+        if start < self.lvl:
+            num = self.lvl - start
+            self.on_level(self, num)
+            
+    def on_level(self, number_of_levels):
+        self.hp += number_of_levels * 25
+    
     # def save_character(player):
     #     with open("character_save.json", "w") as file:
     #         json.dump(player, file)
