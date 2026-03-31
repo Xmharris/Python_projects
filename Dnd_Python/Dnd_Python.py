@@ -60,7 +60,7 @@ def menu():
             f"5) Create a Monster",
             f"0) Print your character stats",
             f"-"*20,
-            sep="\n",
+            sep="\n", 
             )
                        
               
