@@ -1,0 +1,125 @@
+🐉 DND_Python
+A modular Python engine inspired by Dungeons & Dragons mechanics.
+
+This project is an early prototype of a D&D‑style game engine written in Python. It includes character logic, dice mechanics, and a foundation for turn‑based gameplay. The goal is to build a flexible system that can grow into a full campaign engine or be used as a teaching tool for Python learners.
+
+📁 Project Contents
+This folder contains the following files:
+
+Char.py
+A character module (likely an early or alternate version).
+Handles:
+
+Basic character attributes
+
+Stats and modifiers
+
+Possibly simple methods for actions or rolls
+
+Character.py
+A more complete or updated character class.
+Typically includes:
+
+Ability scores
+
+Hit points
+
+Inventory
+
+Methods for attacks, rolls, or leveling
+
+Dnd_Python.py
+The main script for running the engine.
+This file usually:
+
+Initializes characters
+
+Runs encounters or tests
+
+Acts as the entry point for gameplay logic
+
+character_save.json
+A save file storing character data.
+Useful for:
+
+Persisting stats between sessions
+
+Loading/saving progress
+
+Testing serialization
+
+Dnd_Python.pyproj
+Project configuration for Visual Studio or compatible IDEs.
+
+Dnd_Python.slnx
+Solution file for organizing the project in an IDE.
+
+🎯 Project Goals
+This project explores:
+
+Object‑oriented programming
+
+Game logic and state management
+
+Dice mechanics and randomness
+
+Character creation and progression
+
+Saving/loading game data
+
+Modular Python design
+
+It’s a strong portfolio piece showing your ability to build systems, not just scripts.
+
+🚀 How to Run the Project
+Navigate to the folder:
+
+bash
+cd Python_projects/version_one/Dnd_Python
+Run the main script:
+
+bash
+python Dnd_Python.py
+If the entry point changes later, update this section accordingly.
+
+🧠 Features (Current & Planned)
+✔ Current
+Character classes (Char.py, Character.py)
+
+Save/load system (character_save.json)
+
+Core engine logic (Dnd_Python.py)
+
+🔮 Planned Enhancements
+Combat system with initiative
+
+Inventory and equipment
+
+Monster classes
+
+Spell system
+
+Story/campaign scripting
+
+GUI or text‑based interface
+
+Expanded save system
+
+🛠 How to Extend the Engine
+You can expand this project by adding modules such as:
+
+dice.py — dice rolling utilities
+
+combat.py — turn order, attacks, damage
+
+monsters.py — enemy classes
+
+items.py — weapons, armor, consumables
+
+story.py — narrative engine
+
+This folder is a perfect foundation for a full D&D‑style Python game.
+
+🤝 Contributing
+This is a personal development and learning project, but suggestions and improvements are welcome.
+Feel free to open an issue or submit a pull request.
