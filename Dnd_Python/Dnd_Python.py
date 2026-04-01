@@ -36,10 +36,10 @@ def menu():
     print("This is where your character will live and we will write the fucnctions to levvel him up")
     pname =  input("What is your name traveler?")
 
-    player = Character(pname,lvl=1, hp=10 ,exp=0, companion={}, weapons={"Fist" : 5}, invantory={})
-    skell = Character("Skelly", lvl=1, hp=5, exp=0,companion={}, weapons={"Bone" : 3}, invantory={'Magic Bean': "Just a regular bean so it appears"})
-    mouse = Character('Squeek', 1, 2, 5, {}, {})
-    pirate = Character('Black Beard', 10, 40, 30, {'Polly': 5}, {'Sword': 8, 'Peg Leg': 5})
+    player = Character(pname,lvl=1, hp_max=10 , hp=10, exp=0, companion={}, weapons={"Fist" : 5}, invantory={})
+    skell = Character("Skelly", lvl=1, hp_max=5,hp=5, exp=0,companion={}, weapons={"Bone" : 3}, invantory={'Magic Bean': "Just a regular bean so it appears"})
+    mouse = Character('Squeek', 1, 2, 5, 5, {}, {})
+    pirate = Character('Black Beard', 10, 40, 40, 30, {'Polly': 5}, {'Sword': 8, 'Peg Leg': 5})
 
     monsters = [skell, mouse, pirate]
     player.print_character()

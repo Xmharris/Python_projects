@@ -1,12 +1,11 @@
 from dataclasses import dataclass, field
-from multiprocessing.dummy import Value
-from urllib import response
 import json
 
 @dataclass
 class Character:
     name : str
     lvl : int
+    hp_max : int
     hp : int
     exp : int
     companion: dict = field(default_factory=dict)
@@ -14,21 +13,19 @@ class Character:
     invantory: dict = field(default_factory=dict)
 
     def is_alive(self):
+        """Checks HP is above 0. Returns a bool"""
         if self.hp > 0:
             return True
         else: return False
-
-
-    def level_up(self):
-        self.lvl += 1
-        self.hp *= self.lvl
-        print(f"{self.name} is now level {self.lvl}")
-     
+    
     def gain_xp(self,xp):
+        """Adds XP to player and checks if level up is needed"""
         print(f"{self.name} gained {xp} exp!")
         self.exp += xp
+        self.level_check()
        
     def take_dmg(self, dmg):
+        """Subtracts damage from hp and handles death"""
         self.hp -= dmg
         if self.hp < 0:
             print("You died... reincrnating")
@@ -41,15 +38,16 @@ class Character:
         self.hp += health
 
     def create_pet(self):
+        """Creates a companion and sets its stats"""
         pet = input("What is your pets name? ")
-        abilities = {'hp': self.hp/ 2, 'basic_attack' : 5}
-        self.companion[pet] = abilities
+        stats = {'hp': self.hp/ 2, 'basic_attack' : 5}
+        self.companion[pet] = stats
 
         print(
             f"-" * 20,
             f"Pets name: {pet}",
-            f"Hp: {abilities['hp']}",
-            f"Attack: {abilities['basic_attack']}",
+            f"Hp: {stats['hp']}",
+            f"Attack: {stats['basic_attack']}",
             f"-" * 20,
             sep= "\n"
             )
@@ -69,6 +67,7 @@ class Character:
             )   
 
     def level_check(self):
+        """Checks Current Exp and levels up accourding to the dictionary"""
         lev = {
             0 : 1,
             25 : 2,
@@ -81,18 +80,19 @@ class Character:
             350 : 9,
             400 : 10
             }
-        start = self.lvl
+
         for xpneeded, level in lev.items():
-            if self.exp >= xpneeded:
+            """Puts the player level at the corresponding EXP and counts how many levels"""
+            if self.exp >= xpneeded and self.lvl < level:                
                 self.lvl = level
-                print(f"{self.name} leveled up! {self.lvl}")
-        if start < self.lvl:
-            num = self.lvl - start
-            self.on_level(self, num)
-            
-    def on_level(self, number_of_levels):
-        self.hp += number_of_levels * 25
-    
+                self.level_up()
+
+    def level_up(self):  
+        """Raises the Max hp and refills HP"""
+        self.hp_max *= self.lvl
+        self.hp = self.hp_max
+        print(f"{self.name} is now level {self.lvl}")
+
     # def save_character(player):
     #     with open("character_save.json", "w") as file:
     #         json.dump(player, file)
