@@ -18,4 +18,3 @@ class Character:
 
     def heal(self, amount):
         self.hp = min(self.hp_max, self.hp + amount)
-
