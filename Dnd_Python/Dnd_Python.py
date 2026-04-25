@@ -1,6 +1,7 @@
 import json
 from tkinter.messagebox import QUESTION
 from Character import Character
+import Dnd_Python_Dungeon
 import zupy_questions
 import random
 
@@ -29,17 +30,49 @@ def attack(player : Character, opponant: Character):
 
 # def basic_combat(player : Character, opponant: Character):
 #     return
+def random_question():
+            num = random.randint(1,16)
+            q = zupy_questions.questions.get(num)
+            a = zupy_questions.answers.get(num)
+            answer = input(q)
+
+            if answer == a:
+                return True
+            else:
+                print("You got the question wrong the answer is ", a)
+                return False
+
+def walk_the_dungeon(player : Character):
+    in_dungeon = True
+    while in_dungeon:
+        print("You crawl into an old tree trunk and see a stone door.")
+        
+        room_pass = Dnd_Python_Dungeon.room_1()
+        if room_pass == True:
+            print("You passed the first room. You gained 15 xp")
+            player.gain_xp(15)
+            room_pass = Dnd_Python_Dungeon.room_2()
+            if room_pass == True:
+                print("You made it through the second room! You receive 5 hp!")
+                player.heal(10)
+                room_pass = Dnd_Python_Dungeon.room_3()
+                if room_pass == True:
+                    print("You found the cor")
+        else:
+            print("You failed. Try again.")
+            in_dungeon = False
+
 
 def menu():
     print("Welcome to ZUPY101")
     print("This is where your character will live and we will write the fucnctions to levvel him up")
-    pname =  input("What is your name traveler? ")
-
-    player = Character(pname,lvl=1, hp_max=10 , hp=10, exp=0, companion={}, weapons={"Fist" : 5}, invantory={})
+    name =  input("What is your name traveler? ")
+    
+    player = Character(name,lvl=1, hp_max=10 , hp=10, exp=0, companion={}, weapons={"Fist" : 5}, invantory={})
     skell = Character("Skelly", lvl=1, hp_max=5,hp=5, exp=0,companion={}, weapons={"Bone" : 3}, invantory={'Magic Bean': "Just a regular bean so it appears"})
     mouse = Character('Squeek', 1, 2, 5, 5, {}, {})
     pirate = Character('Black Beard', 10, 40, 40, 30, {'Polly': 5}, {'Sword': 8, 'Peg Leg': 5})
-
+    
     monsters = [skell, mouse, pirate]
     player.print_character()
 
@@ -56,12 +89,15 @@ def menu():
             f"3) Explore Cave of Wonders",
             f"4) Answer a riddle",
             f"5) Create a Monster",
+            f"6) Enter the Dungeon"
             f"0) Print your character stats",
             f"-"*20,
             sep="\n", 
             )
-                       
-              
+
+
+        
+
         try:
            select = int(input("Choose a number or 'stop' to exit "))
         except:
@@ -70,30 +106,20 @@ def menu():
         num = None
         if select == 1:
             print("You must first answer a question before you can create your companion.")
-            num = random.randint(1,16)
-            q = zupy_questions.questions.get(num)
-            a = zupy_questions.answers.get(num)
-            answer = input(q)
-
-            if answer == a:
-                print("That is correct!")
-                
+            quiz = random_question()
+            if quiz == True:
+                print("You got the question right. You get to create a companion.")
+                player.create_pet()
+                player.gain_xp(20)
+                print("Exp + 20")
             else:
-                print("Your test went arry!! incorrect. You still get a companion")
-                player.take_dmg(5)
-                print(f"{player.name} took 5 damage!")
-            player.create_pet()
-            player.gain_xp(20)
-            print("Exp + 20")
-               
+                break
         elif select == 2:
 
-            num = random.randint(1,16)
-            q = zupy_questions.questions.get(num)
-            a = zupy_questions.answers.get(num)
-            answer = input(q)
+            quiz = random_question()
+           
 
-            if answer == a:
+            if quiz== True:
                 print("That is correct!")
                 player.gain_xp(20)
                 player.invantory['Dodge in a Bottle'] = "Use to avoid receiving damage (uses automaticly one time)"
@@ -118,7 +144,7 @@ def menu():
                 print("You have awoke the sleeping dead! 5 skeletons arrive! Prepair for battle ")
                 answer = input("write a loop statement to hit each skeleton to knock them out ")
                 if answer == "for loop":
-                    # basic_combat(player, skell)
+                    attack(player, skell)
                     player.weapons["Great Python Sward"] = 20
                     print("You received a Great Sword!")
                     player.gain_xp(40)
@@ -195,11 +221,15 @@ def menu():
                 fight = input("Want to fight one? Type the name or 'No' to run")
                 if fight not in monsters or fight == 'No':
                     print("You ran away")
-                    continue
+                    
                 else:
                     attack(player,fight)
+        
+        elif select == 6:
+            walk_the_dungeon(player)
+
         elif select == 0:
-                 player.print_character()
+                 player.print_character()    
 
         else:
            select == "stop"

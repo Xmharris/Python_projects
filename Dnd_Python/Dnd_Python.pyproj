@@ -23,6 +23,8 @@
   <ItemGroup>
     <Compile Include="Character.py" />
     <Compile Include="Dnd_Python.py" />
+    <Compile Include="Dnd_Python_Dungeon.py" />
+    <Compile Include="Monsters.py" />
     <Compile Include="zupy_questions.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
